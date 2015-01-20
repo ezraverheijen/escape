@@ -12,8 +12,10 @@
  * @link https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php
  * @link https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
  * 
- * @author Ezra Verheijen <ezra.verheijen@gmail.com>
- * @link   https://github.com/ezraverheijen/escape
+ * @author    Ezra Verheijen <ezra.verheijen@gmail.com>
+ * @link      https://github.com/ezraverheijen/escape
+ * @copyright Ezra Verheijen
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class Escape
 {
@@ -107,7 +109,7 @@ class Escape
      * 
      * Stay away from putting untrusted data into complex properties like url,
      * behavior, and custom (-moz-binding). You should also not put untrusted data
-     * into IE’s expression property value which allows JavaScript.
+     * into IEâ€™s expression property value which allows JavaScript.
      * 
      * <style>selector { property : ...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...; } </style>
      * <style>selector { property : "...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE..."; } </style>
