@@ -15,7 +15,7 @@
  * @author    Ezra Verheijen <ezra.verheijen@gmail.com>
  * @link      https://github.com/ezraverheijen/escape
  * @copyright Ezra Verheijen
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
  */
 class Escape
 {
