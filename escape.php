@@ -6,7 +6,7 @@
  * Class to handle context specific output escaping per OWASP recommendations.
  * 
  * Most of this class is based on methods from Zend\Escaper.
- * Copyrighted (c) 2005-2014 Zend Technologies USA Inc. (http://www.zend.com)
+ * Copyrighted (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * under the New BSD License (http://framework.zend.com/license/new-bsd).
  * 
  * @link https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php
@@ -15,7 +15,7 @@
  * @author    Ezra Verheijen <ezra.verheijen@gmail.com>
  * @link      https://github.com/ezraverheijen/escape
  * @copyright Ezra Verheijen
- * @license   http://framework.zend.com/license/new-bsd New BSD License
+ * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 class Escape
 {
@@ -29,12 +29,12 @@ class Escape
      * into any execution context, such as script, style, or event handlers.
      * 
      * <body>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</body>
-     * <div>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</div>
+     * <div>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</div> 
      * 
      * @uses ENT_SUBSTITUE if available (PHP >= 5.4)
      * 
-     * @param string $string
-     * @return string
+     * @param  string $string
+     * @return string 
      */
     public static function html($string)
     {
@@ -45,6 +45,34 @@ class Escape
         }
         
         return htmlspecialchars($string, $flags, 'UTF-8');
+    }
+    
+    /**
+     * Escape XML element content
+     * 
+     * Removes offending characters that could be wrongfully interpreted as XML markup.
+     * 
+     * The following characters are reserved in XML and will be replaced with their
+     * corresponding XML entities:
+     * 
+     * ' is replaced with &apos;
+     * " is replaced with &quot;
+     * & is replaced with &amp;
+     * < is replaced with &lt;
+     * > is replaced with &gt;
+     * 
+     * @uses ENT_XML1 if available (PHP >= 5.4)
+     * 
+     * @param  string $string
+     * @return string 
+     */
+    public static function xml($string)
+    {
+        if (defined('ENT_XML1')) {
+            return htmlspecialchars($string, ENT_QUOTES | ENT_XML1, 'UTF-8');
+        } else {
+            return str_replace('&#039;', '&apos;', htmlspecialchars($string, ENT_QUOTES, 'UTF-8'));
+        }
     }
     
     /**
@@ -62,10 +90,10 @@ class Escape
      * <div attr='...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...'>content</div>
      * <div attr="...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...">content</div>
      * 
-     * @param string $string
-     * @param string $strict Whether to escape characters like [space] % * + , - / ; < = > ^ and |
+     * @param  string $string
+     * @param  string $strict Whether to escape characters like [space] % * + , - / ; < = > ^ and |
      *                       which is necessary in case of unquoted HTML attributes.
-     * @return string
+     * @return string 
      */
     public static function attr($string, $strict = false)
     {
@@ -90,8 +118,8 @@ class Escape
      * <script>x='...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...'</script>
      * <div onmouseover="x='...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...'"</div>
      * 
-     * @param string $string
-     * @return string
+     * @param  string $string
+     * @return string 
      */
     public static function js($string)
     {
@@ -115,8 +143,8 @@ class Escape
      * <style>selector { property : "...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE..."; } </style>
      * <span style="property : ...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...">text</span>
      * 
-     * @param string $string
-     * @return string
+     * @param  string $string
+     * @return string 
      */
     public static function css($string)
     {
@@ -135,8 +163,8 @@ class Escape
      * 
      * <a href="http://www.somesite.com?test=...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...">link</a>
      * 
-     * @param string $string
-     * @return string
+     * @param  string $string
+     * @return string 
      */
     public static function url($string)
     {
@@ -149,7 +177,7 @@ class Escape
      * Callback function for preg_replace_callback() that applies HTML attribute
      * escaping to all matches.
      * 
-     * @param array $matches
+     * @param  array $matches
      * @return mixed Unicode replacement if character is undefined in HTML,
      *               named HTML entity if available (only those that XML supports),
      *               upper hex entity if a named entity does not exist or
@@ -189,8 +217,8 @@ class Escape
      * Callback function for preg_replace_callback() that applies Javascript
      * escaping to all matches.
      * 
-     * @param array $matches
-     * @return string
+     * @param  array  $matches
+     * @return string 
      */
     protected static function escapeJSChar($matches)
     {
@@ -211,8 +239,8 @@ class Escape
      * Callback function for preg_replace_callback() that applies CSS
      * escaping to all matches.
      * 
-     * @param array $matches
-     * @return string
+     * @param  array  $matches
+     * @return string 
      */
     protected static function escapeCSSChar($matches)
     {
@@ -231,8 +259,8 @@ class Escape
     /**
      * Check if a string needs to be escaped or not
      * 
-     * @param string $string
-     * @return boolean
+     * @param  string  $string
+     * @return boolean 
      */
     public static function noNeedToEscape($string)
     {
@@ -242,8 +270,8 @@ class Escape
     /**
      * Convert a character from UTF-8 to UTF-16BE
      * 
-     * @param string $char
-     * @return string
+     * @param  string $char
+     * @return string 
      */
     public static function convertEncoding($char)
     {
@@ -253,8 +281,8 @@ class Escape
     /**
      * Check if a character is undefined in HTML
      * 
-     * @param string $char
-     * @return boolean
+     * @param  string  $char
+     * @return boolean 
      */
     public static function charIsUndefined($char)
     {
@@ -267,10 +295,10 @@ class Escape
 /**
  * Escape context specific output
  * 
- * @param string $string Untrusted data
- * @param string $context Location of output
- * @param boolean $strict Whether to escape an extended set of characters (HTML attributes only)
- * @return string Escaped data
+ * @param  string  $string  Untrusted data
+ * @param  string  $context Location of output
+ * @param  boolean $strict  Whether to escape an extended set of characters (HTML attributes only)
+ * @return string           Escaped data
  */
 function esc($string, $context = 'html', $strict = false)
 {
