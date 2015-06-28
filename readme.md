@@ -6,6 +6,7 @@ PHP class to handle context specific output escaping per OWASP recommendations.
 
 ```php
 <?php
+require 'escape.php';
 
 $esc = Escape::html('& " \' < >');
 var_dump($esc);
@@ -23,6 +24,7 @@ string(29) "&amp; &quot; &#039; &lt; &gt;"
 
 ```php
 <?php
+require 'escape.php';
 
 $esc = esc('& " \' < >', 'css');
 var_dump($esc);
