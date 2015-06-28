@@ -1,6 +1,6 @@
 # escape
 
-PHP class to handle context specific output escaping per OWASP recommendations.
+PHP class to help prevent XSS (Cross Site Scripting) per OWASP recommendations as described [here](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
 ### Example 1:
 
