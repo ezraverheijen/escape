@@ -95,7 +95,7 @@ class Escape
      *                       which is necessary in case of unquoted HTML attributes.
      * @return string 
      */
-    public static function attr($string, $strict = false)
+    public static function attr($string, $strict = true)
     {
         if (static::noNeedToEscape($string)) {
             return $string;
