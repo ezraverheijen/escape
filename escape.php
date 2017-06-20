@@ -29,7 +29,7 @@ class Escape
      * into any execution context, such as script, style, or event handlers.
      * 
      * <body>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</body>
-     * <div>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</div> 
+     * <div>...ESCAPE UNTRUSTED DATA BEFORE PUTTING HERE...</div>
      * 
      * @param  string $string
      * @return string 
@@ -248,7 +248,7 @@ class Escape
      * @param  string  $string
      * @return boolean 
      */
-    public static function noNeedToEscape($string)
+    protected static function noNeedToEscape($string)
     {
         return $string === '' || ctype_digit($string);
     }
@@ -259,7 +259,7 @@ class Escape
      * @param  string $char
      * @return string 
      */
-    public static function convertEncoding($char)
+    protected static function convertEncoding($char)
     {
         return iconv('UTF-8', 'UTF-16BE', $char);
     }
@@ -270,7 +270,7 @@ class Escape
      * @param  string  $char
      * @return boolean 
      */
-    public static function charIsUndefined($char)
+    protected static function charIsUndefined($char)
     {
         $ascii = ord($char);
         return ($ascii <= 0x1f && $char != "\t" && $char != "\n" && $char != "\r")
