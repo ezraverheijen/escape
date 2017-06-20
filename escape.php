@@ -9,7 +9,7 @@
  * Copyrighted (c) 2005-2015 Zend Technologies USA Inc. (http://www.zend.com)
  * under the New BSD License (http://framework.zend.com/license/new-bsd).
  * 
- * @link https://github.com/zendframework/zf2/blob/master/library/Zend/Escaper/Escaper.php
+ * @link https://github.com/zendframework/zend-escaper/blob/master/src/Escaper.php
  * @link https://www.owasp.org/index.php/XSS_(Cross_Site_Scripting)_Prevention_Cheat_Sheet
  * 
  * @author    Ezra Verheijen <ezra.verheijen@gmail.com>
